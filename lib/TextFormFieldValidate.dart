@@ -171,8 +171,7 @@ class _TextFormFieldValidateState extends State<TextFormFieldValidate> {
                     onPressed: () {
                       _formKey.currentState!.reset();
                       setState(() {
-                        _fullName =
-                            null; // đây là rest tất cả nếu dùng   _formKey.currentState!.reset();
+                        _fullName = null; // đây là rest tất cả nếu dùng   _formKey.currentState!.reset();
                         //reset theo trường cụ thể thì dùng clear();
                       });
                     },
