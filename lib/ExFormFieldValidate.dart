@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class exFormFieldValidate extends StatefulWidget {
   @override
@@ -15,6 +19,7 @@ class _exFormFieldValidateState extends State<exFormFieldValidate> {
   final _emailController = TextEditingController();
   final _passWordController = TextEditingController();
   final _dateOfBirthController = TextEditingController();
+  DateTime? _dateOfBirth;
   bool _obscurePassword = true;
   bool _isChecked = true;
   String? _fullName;
@@ -82,20 +87,96 @@ class _exFormFieldValidateState extends State<exFormFieldValidate> {
                     _fullName = fullNameValue;
                   },
                 ),
+// Image picker
+              FormField<File>(
+                validator: (value) {
+                  if (value == null) {
+                    return 'Vui lòng chọn ảnh đại diện.';
+                  }
+                  return null;
+                },
+                builder: (FormFieldState<File> state) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Ảnh đại diện'),
+                      SizedBox(height: 10),
+
+                      // Ảnh đã chọn
+                      if (state.value != null)
+                        ClipOval(
+                          child: Image.file(
+                            state.value!,
+                            height: 120,
+                            width: 120,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+
+                      SizedBox(height: 10),
+
+                      ElevatedButton(
+                        onPressed: () async {
+                          final XFile? pickedImage = await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('Chọn nguồn ảnh'),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ListTile(
+                                      leading: Icon(Icons.photo_library),
+                                      title: Text('Thư viện'),
+                                      onTap: () async {
+                                        Navigator.pop(
+                                          context,
+                                          await ImagePicker().pickImage(
+                                            source: ImageSource.gallery,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(Icons.camera_alt),
+                                      title: Text('Chụp ảnh'),
+                                      onTap: () async {
+                                        Navigator.pop(
+                                          context,
+                                          await ImagePicker().pickImage(
+                                            source: ImageSource.camera,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+
+                          if (pickedImage != null) {
+                            state.didChange(File(pickedImage.path)); // QUAN TRỌNG
+                          }
+                        },
+                        child: Text('Chọn ảnh'),
+                      ),
+
+                      if (state.hasError)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            state.errorText!,
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              ),
 
 
-                SizedBox(
-                  height: 200,
-                  child: Container(
-                    color: Colors.blue,
-                    // padding: EdgeInsets.all(12),
-                    child: Text("Đây là ví dụ về Form Field Validate trong Flutter.",
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                  ),
-
-                ),
-                SizedBox(height: 20),
+              SizedBox(height: 20),
 
                 TextFormField(
                   controller: _emailController,
@@ -177,6 +258,7 @@ class _exFormFieldValidateState extends State<exFormFieldValidate> {
                 // Date of birth
                 SizedBox(height: 16,),
                   TextFormField(
+                    controller: _dateOfBirthController,
                       decoration: InputDecoration(
                         label: Text("Nhập ngày sinh"),
                         hintText: "DD/MM/YYYY",
@@ -185,9 +267,32 @@ class _exFormFieldValidateState extends State<exFormFieldValidate> {
 
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
-                        )
+                        ),
+
                       ),
+                    readOnly: true,
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime(2025),
+                      );
+
+                      if (pickedDate != null) {
+                        String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
+                        setState(() {
+                          _dateOfBirth = pickedDate;
+                          _dateOfBirthController.text = formattedDate;
+                        });
+                      }
+                    },
                     keyboardType: TextInputType.datetime,
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return "Vui lòng nhập ngày sinh.";
+                      }
+                      return null;
+                    },
                   ),
                 SizedBox(height: 16,),
 
@@ -290,6 +395,7 @@ class _exFormFieldValidateState extends State<exFormFieldValidate> {
                           _fullNameController.clear();
                           _emailController.clear();
                           _passWordController.clear();
+                          _dateOfBirthController.clear();
                           setState(() {
                             _fullName = null;
                             _email = null;
