@@ -5,6 +5,7 @@ import 'package:test_scafflod/userMS/view/UserListScreen.dart';
 
 import 'DateTimePicker.dart';
 import 'ExFormFieldValidate.dart';
+import 'ExampleTest2.dart';
 import 'GestureDetector.dart';
 import 'ImagesPicker.dart';
 import 'MyFormBasic.dart';
@@ -44,11 +45,9 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-<<<<<<< HEAD
-      home:  Datetimepicker(),
-=======
-      home:  ParentA(),
->>>>>>> e5cf46c5293d62ac7f051bc2fe4ade268d5ac370
+
+      home:  ExampleTest2(),
+
       debugShowCheckedModeBanner: false,
     );
   }
