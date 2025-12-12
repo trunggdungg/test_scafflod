@@ -3,15 +3,21 @@ import 'package:test_scafflod/MyScaffold.dart';
 import 'package:test_scafflod/testExtends.dart';
 import 'package:test_scafflod/userMS/view/UserListScreen.dart';
 
+import 'AnimationRouteTransition.dart';
+import 'CarouselStaggeredGridTileAndProgress.dart';
 import 'DateTimePicker.dart';
 import 'ExFormFieldValidate.dart';
+import 'ExampleCard.dart';
 import 'ExampleTest2.dart';
+import 'ExpansionTileCardExample.dart';
 import 'GestureDetector.dart';
 import 'ImagesPicker.dart';
 import 'MyFormBasic.dart';
 import 'MyTextField.dart';
 import 'MyTextField2.dart';
+import 'SlideBar.dart';
 import 'TextFormFieldValidate.dart';
+import 'Video.dart';
 
 
 
@@ -46,7 +52,7 @@ class MyApp extends StatelessWidget {
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
 
-      home:  ExampleTest2(),
+      home:  animationRouteTransitionEx(),
 
       debugShowCheckedModeBanner: false,
     );

@@ -36,10 +36,20 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
-  intl: ^0.19.0
-  image_picker: ^1.2.1
-  google_fonts: ^6.3.3
-  sqflite: ^2.4.2
+  intl: ^0.19.0 #Định dạng ngày tháng
+  image_picker: ^1.2.1 #Chọn hình ảnh từ thư viện hoặc chụp ảnh mới
+  google_fonts: ^6.3.3 #Sử dụng font chữ từ Google Fonts
+  sqflite: ^2.4.2 #Cơ sở dữ liệu SQLite cho Flutter
+  carousel_slider: ^5.0.0 #Tạo các thanh trượt hình ảnh hoặc nội dung
+  flutter_staggered_grid_view: ^0.7.0 #Tạo lưới có kích thước không đều
+  video_player: ^2.9.3 #Phát video trong ứng dụng Flutter
+  expansion_tile_card: ^3.0.0 #Tạo các thẻ có thể mở rộng với hiệu ứng hoạt hình
+  syncfusion_flutter_charts: ^28.2.7 #Tạo biểu đồ và đồ thị trong ứng dụng Flutter
+  convex_bottom_bar: ^3.2.0 #Tạo thanh điều hướng dưới cùng với thiết kế lồi
+  flutter_slidable: ^4.0.0 #Tạo các mục có thể trượt với các hành động
+  another_flushbar: ^1.12.32 #Hiển thị thông báo dạng thanh trượt
+  auto_size_text: ^3.0.0 # Tự động điều chỉnh kích thước văn bản để phù hợp với không gian có sẵn
+  skeleton_text: ^3.0.1 # Hiển thị hiệu ứng khung xương khi tải nội dung
   path: ^1.9.1
 
 dev_dependencies:
