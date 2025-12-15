@@ -11,6 +11,8 @@ import 'ExampleCard.dart';
 import 'ExampleTest2.dart';
 import 'ExpansionTileCardExample.dart';
 import 'GestureDetector.dart';
+import 'HeroAnimation.dart';
+import 'HingeAnimation.dart';
 import 'ImagesPicker.dart';
 import 'MyFormBasic.dart';
 import 'MyTextField.dart';
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
 
-      home:  animationRouteTransitionEx(),
+      home:  HingeAnimationExamplePage(),
 
       debugShowCheckedModeBanner: false,
     );

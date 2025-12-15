@@ -50,6 +50,7 @@ dependencies:
   another_flushbar: ^1.12.32 #Hiển thị thông báo dạng thanh trượt
   auto_size_text: ^3.0.0 # Tự động điều chỉnh kích thước văn bản để phù hợp với không gian có sẵn
   skeleton_text: ^3.0.1 # Hiển thị hiệu ứng khung xương khi tải nội dung
+  lazy_load_scrollview: ^1.3.0 # Tải thêm nội dung khi cuộn đến cuối danh sách
   path: ^1.9.1
 
 dev_dependencies:
