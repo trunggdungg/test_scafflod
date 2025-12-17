@@ -17,11 +17,12 @@ import 'ImagesPicker.dart';
 import 'MyFormBasic.dart';
 import 'MyTextField.dart';
 import 'MyTextField2.dart';
+import 'Navigation&Routing/ArgumentsInNamedRoutes.dart';
+import 'Navigation&Routing/RoutesAndNavigator.dart';
 import 'SlideBar.dart';
 import 'TextFormFieldValidate.dart';
 import 'Video.dart';
-
-
+import 'lottieAnimation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,10 +55,36 @@ class MyApp extends StatelessWidget {
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
 
-      home:  HingeAnimationExamplePage(),
+      home: ExArgumentsInNamedRoutes(),
+      routes: {
+        '/second': (context) {
+          return SecondRoute();
+        },
+        '/third': (context) => ThirdRoute(),
+      },
 
+      onGenerateRoute: (settings) {
+        if (settings.name == PassArgumentsScreen.routeName1) {
+          print('name: ${settings.name}');
+          final agrd = settings.arguments as Arguments;
+          return MaterialPageRoute(
+            builder: (context) {
+              return PassArgumentsScreen(
+                title: agrd.title,
+                message: agrd.message,
+              );
+            },
+          );
+        }
+        if(settings.name =='/third'){
+            return MaterialPageRoute(
+                builder: (context) => ThirdRoute()
+            );
+        }
+        assert (false, 'Need to implement ${settings.name}');
+        return null;
+      },
       debugShowCheckedModeBanner: false,
     );
   }
 }
-

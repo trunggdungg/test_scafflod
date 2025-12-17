@@ -4,6 +4,8 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:rive/rive.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 class slideBarEx extends StatefulWidget {
@@ -55,8 +57,14 @@ class _slideBarExState extends State<slideBarEx> {
         children: [
           slideBarWidget(),
           autoResizeTextEx(),
-          skeletonWidgetEx(),
-          Center(child: Text('Message Screen')),
+          Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.red[100]!,
+            child: skeletonWidgetEx(),
+          )
+          /// hoặc chỉ cần gọi skeletonWidgetEx() thôi cũng được
+          ,
+        ExRive(),
           Center(child: Text('Profile Screen')),
         ],
       ),
@@ -191,6 +199,33 @@ class _slideBarExState extends State<slideBarEx> {
             style: TextStyle(fontSize: 50),
             maxLines: 3,
           ),
+        ),
+      ),
+    );
+  }
+/// Rive Animation example
+  Widget ExRive(){
+    return Container(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration:BoxDecoration(
+                color: Colors.red
+              ),
+              width: 200,
+              height: 200,
+              child: RiveAnimation.asset(
+                'assets/bubble-button.riv',
+                fit: BoxFit.contain,
+                animations: const ['*'],
+              )
+              ,
+            )
+            ,
+            Text('Rive Animation Example'),
+          ],
         ),
       ),
     );
