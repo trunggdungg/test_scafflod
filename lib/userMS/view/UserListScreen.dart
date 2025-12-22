@@ -96,7 +96,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
               return Dismissible(
                 key: ValueKey(user.id),
-                direction: DismissDirection.endToStart,
+                direction: DismissDirection.endToStart,/// chỉ cho phép vuốt từ phải sang trái để xoá
                 background: Container(
                   alignment: Alignment.centerRight,
                   padding: EdgeInsets.only(right: 20),
