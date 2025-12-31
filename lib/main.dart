@@ -1,10 +1,27 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:test_scafflod/MyScaffold.dart';
 import 'package:test_scafflod/testExtends.dart';
 import 'package:test_scafflod/userMS/view/UserListScreen.dart';
 
+import 'AccessingDevice/BackgroundLocalNotifications.dart';
+import 'AccessingDevice/GalleryAccess.dart';
+import 'AccessingDevice/RestrictLandscape.dart';
+import 'AdvancedConcepts/ImplementingRestAPI/home.dart';
+import 'AdvancedConcepts/ReadAndWriteDataOnFirebase.dart';
+import 'AdvancedConcepts/SpeedDialFAB.dart';
 import 'AnimationRouteTransition.dart';
+import 'BuildAppEx/404.dart';
+import 'BuildAppEx/BasicQuizApp/homeQuiz.dart';
+import 'BuildAppEx/ExampleUi.dart';
+import 'BuildAppEx/Navigator/ScreenA.dart';
+import 'BuildAppEx/Pdf.dart';
+import 'BuildAppEx/Stack.dart';
+import 'BuildAppEx/calculator.dart';
+import 'BuildAppEx/cardEx.dart';
 import 'CarouselStaggeredGridTileAndProgress.dart';
+import 'CrudSqlLite/screens/user_list_screen.dart';
 import 'DateTimePicker.dart';
 import 'ExFormFieldValidate.dart';
 import 'ExampleCard.dart';
@@ -18,13 +35,46 @@ import 'MyFormBasic.dart';
 import 'MyTextField.dart';
 import 'MyTextField2.dart';
 import 'Navigation&Routing/ArgumentsInNamedRoutes.dart';
+import 'Navigation&Routing/DeletingData.dart';
+import 'Navigation&Routing/FetchingData.dart';
+import 'Navigation&Routing/ReturnDataFromScreen.dart';
 import 'Navigation&Routing/RoutesAndNavigator.dart';
+import 'Navigation&Routing/SendingData.dart';
+import 'Navigation&Routing/UpdatingData.dart';
+import 'Navigation&Routing/testUpdateEx.dart';
 import 'SlideBar.dart';
 import 'TextFormFieldValidate.dart';
 import 'Video.dart';
+import 'firebase_options.dart';
 import 'lottieAnimation.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const AndroidInitializationSettings androidSettings =
+  AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  const DarwinInitializationSettings iosSettings =
+  DarwinInitializationSettings();
+
+  const InitializationSettings initSettings =
+  InitializationSettings(android: androidSettings, iOS: iosSettings);
+
+  await flutterLocalNotificationsPlugin.initialize(
+    initSettings,
+    onDidReceiveNotificationResponse: (response) {
+      print('Payload: ${response.payload}');
+    },
+  );
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+
   runApp(const MyApp());
 }
 
@@ -55,7 +105,7 @@ class MyApp extends StatelessWidget {
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
 
-      home: ExArgumentsInNamedRoutes(),
+      home: calculatorEx(),
       routes: {
         '/second': (context) {
           return SecondRoute();

@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:test_scafflod/BuildAppEx/BasicQuizApp/question.dart';
 
 import 'answer.dart';
+
 
 class Quiz extends StatelessWidget {
   final List<Map<String, Object>> questions;
@@ -25,6 +24,9 @@ class Quiz extends StatelessWidget {
           questions[questionIndex]['questionText'].toString(),
         ), //Question
         ...(questions[questionIndex]['answers'] as List<Map<String, Object>>)
+        /// ... là toán tử spread operator trong Dart,
+        /// nó được sử dụng để "trải rộng" các phần tử của
+        /// một iterable (như List hoặc Set) vào trong một collection khác.
             .map((answer) {
           return Answer(
             selectHandler: () => answerQuestion(answer['score']),
